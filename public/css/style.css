@@ -1,0 +1,26 @@
+html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
+#map { position: fixed; inset: 0; }
+
+/* Top-right corner: leaflet's zoom control is top-left and its credit is bottom-right. */
+#panel {
+  position: fixed; top: 10px; right: 10px; z-index: 1000;
+  box-sizing: border-box; width: 220px; max-width: calc(100vw - 80px);
+  display: flex; flex-direction: column; gap: 6px;
+}
+#readout, #notice, #track-button {
+  background: rgba(255, 255, 255, 0.92); border-radius: 6px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+}
+#readout { padding: 6px 10px; font-size: 14px; }
+#readout dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; }
+#readout dt { font-weight: 600; }
+#readout dd { margin: 0; text-align: right; }
+#readout p { margin: 4px 0 0; }
+#notice { margin: 0; padding: 6px 10px; font-size: 13px; }
+#notice:empty { display: none; }
+#track-button { padding: 10px; font-size: 16px; border: 0; cursor: pointer; }
+#track-button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+@media (max-width: 480px) {
+  #panel { width: auto; left: 56px; max-width: none; }
+  #readout { font-size: 13px; }
+}
