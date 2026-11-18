@@ -8,7 +8,7 @@ const PUBLIC_DIR = fileURLToPath(new URL("../public", import.meta.url));
 const LEAFLET_DIR = fileURLToPath(new URL("../node_modules/leaflet/dist", import.meta.url));
 
 // Scripts only from us; the only pictures from elsewhere are OpenStreetMap's map tiles.
-const PAGE_CSP = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://*.tile.openstreetmap.org; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'";
+const PAGE_CSP = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'";
 
 /**
  * Every request's answer: `{ status, type, body, headers? }`.

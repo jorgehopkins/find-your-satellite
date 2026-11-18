@@ -26,3 +26,16 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   #panel { width: auto; left: 56px; max-width: none; }
   #readout { font-size: 13px; }
 }
+
+/* Marker looks. These live here, not in inline style attributes, because the page CSP has no 'unsafe-inline'. */
+.iss-marker, .you-marker {
+  display: block; box-sizing: border-box; border: 3px solid #fff;
+}
+.iss-marker {
+  width: 22px; height: 22px; border-radius: 50%; background: #e63946;
+  box-shadow: 0 0 0 2px #e63946, 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+.you-marker {
+  width: 18px; height: 18px; border-radius: 3px; transform: rotate(45deg); background: #1d4ed8;
+  box-shadow: 0 0 0 2px #1d4ed8, 0 1px 6px rgba(0, 0, 0, 0.6);
+}

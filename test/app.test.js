@@ -62,7 +62,7 @@ describe("the portal page", () => {
   it("sends a Content-Security-Policy limiting scripts and images", async () => {
     const csp = (await fetch(`${base}/`)).headers.get("content-security-policy");
     expect(csp).toMatch(/script-src 'self'(;|$)/);
-    expect(csp).toContain("img-src 'self' data: https://*.tile.openstreetmap.org");
+    expect(csp).toContain("img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org");
   });
 
   it("has a Cache-Control that is safe in development", async () => {
