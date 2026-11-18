@@ -2,7 +2,7 @@
   "modules": [
     {
       "id": "src",
-      "files": 2,
+      "files": 4,
       "summary": "Started from the Software Factory's `web-app` Domain Pack.",
       "dependsOn": [],
       "interface": [
@@ -10,6 +10,19 @@
           "file": "app.js",
           "names": [
             "handle"
+          ]
+        },
+        {
+          "file": "http.js",
+          "names": [
+            "createApp",
+            "stdoutLog"
+          ]
+        },
+        {
+          "file": "tracing.js",
+          "names": [
+            "withSpan"
           ]
         }
       ]
