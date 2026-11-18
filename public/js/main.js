@@ -4,6 +4,7 @@ import { map } from "./map.js";
 import { feed } from "./feed.js";
 import { interpolatePosition } from "./animate.js";
 import { noticeText, readoutText } from "./format.js";
+import "./tracking.js";
 import "./location.js";
 import "./trail-layer.js";
 
