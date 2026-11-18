@@ -139,6 +139,28 @@ describe("GET /api/iss", () => {
     expect(logs.find((l) => l.msg === "ISS upstream failed").cause).toContain("500");
   });
 
+  it("T12: logs the underlying cause (name, message, code) of a failed fetch, and keeps it from clients", async () => {
+    const failFetch = () => {
+      const cause = Object.assign(new Error("connect ECONNREFUSED 10.0.0.1:443"), { code: "ECONNREFUSED" });
+      throw new TypeError("fetch failed", { cause });
+    };
+    await start(failFetch);
+    const { response, text } = await get();
+    expect(response.status).toBe(503);
+    expect(text).toBe(JSON.stringify({ error: "ISS position unavailable" }));
+    expect(text).not.toMatch(/ECONNREFUSED|cause|stack/);
+    const failed = logs.find((l) => l.msg === "ISS upstream failed");
+    expect(failed.cause).toBe("fetch failed");
+    expect(failed.underlyingCause).toEqual({ name: "Error", message: "connect ECONNREFUSED 10.0.0.1:443", code: "ECONNREFUSED" });
+    expect(JSON.stringify(failed)).toContain("ECONNREFUSED");
+  });
+
+  it("T12: copes with a cause that is not an Error", async () => {
+    await start(() => { throw new TypeError("fetch failed", { cause: "plain text reason" }); });
+    await get();
+    expect(logs.find((l) => l.msg === "ISS upstream failed").underlyingCause).toEqual({ message: "plain text reason" });
+  });
+
   it("gives up on an upstream that doesn't answer, and tells the fetch to abort", async () => {
     await start(() => new Promise(() => {}));
     const { response } = await get();
