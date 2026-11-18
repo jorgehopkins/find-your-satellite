@@ -77,3 +77,10 @@ As one change merged to `main`, replacing the "Hello" page. No feature flag, no 
 - AC-19: With tracking on and the data out of date, the map stays at the last position; when a fresh position arrives, tracking resumes without another click.
 - AC-20: Each request is logged with method, route, status and duration, the position request and the outgoing call to the data service are traced, and the health endpoint still answers.
 - AC-21: `docs/satellite-data-sources.md` exists and covers, for each other source, access requirements, rate limits and trade-offs, plus the later ideas and the tile-provider note listed in Scope.
+
+## Acceptance note
+
+Accepted on 2026-11-18 with these known gaps:
+
+- **bug**: ISS marker jumps across the whole map when it crosses the ±180° line
+- **bug**: Tracking leaves the ISS off-screen after it crosses the ±180° line
