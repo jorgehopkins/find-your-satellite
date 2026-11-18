@@ -19,6 +19,17 @@ class UpstreamError extends Error {
   }
 }
 
+/**
+ * The real reason behind a failure, for the log only: Node's fetch rejects with "fetch failed" and keeps
+ * the reason (ECONNREFUSED, ENOTFOUND, a TLS error, ...) in `error.cause`. No stack trace.
+ */
+function describeCause(cause) {
+  if (cause === undefined || cause === null) return undefined;
+  if (typeof cause !== "object") return { message: String(cause) };
+  const described = { name: cause.name, message: cause.message, code: cause.code };
+  return Object.fromEntries(Object.entries(described).filter(([, value]) => value !== undefined));
+}
+
 /** Calls the data service once and returns the validated Position (with the upstream's Unix time). */
 async function fetchPosition(fetchFn) {
   return withSpan("wheretheiss.at fetch", { "http.request.method": "GET", "url.full": UPSTREAM_URL }, async (span) => {
@@ -73,6 +84,7 @@ export function createIss({ fetch: fetchFn = globalThis.fetch, now = Date.now, l
         level: "error",
         msg: "ISS upstream failed",
         cause: error?.status === undefined ? (error?.message ?? String(error)) : `status ${error.status}: ${error.message}`,
+        underlyingCause: describeCause(error?.cause),
         upstreamStatus: error?.status,
         servedLastPosition: last !== undefined,
       });
