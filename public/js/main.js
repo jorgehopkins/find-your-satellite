@@ -5,6 +5,8 @@ import { feed } from "./feed.js";
 import { interpolatePosition } from "./animate.js";
 import { noticeText, readoutText } from "./format.js";
 import "./tracking.js";
+import "./location.js";
+import "./trail-layer.js";
 
 const MOVE_MS = 5000; // about the poll interval, so the marker keeps moving until the next update
 
