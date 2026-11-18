@@ -26,3 +26,7 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   #panel { width: auto; left: 56px; max-width: none; }
   #readout { font-size: 13px; }
 }
+
+/* Marker shapes live here, not in style attributes, which the page's CSP (style-src 'self') blocks. */
+.iss-dot { display: block; width: 22px; height: 22px; box-sizing: border-box; border-radius: 50%; background: #e63946; border: 3px solid #fff; box-shadow: 0 0 0 2px #e63946, 0 1px 6px rgba(0, 0, 0, 0.6); }
+.you-dot { display: block; width: 18px; height: 18px; box-sizing: border-box; border-radius: 3px; transform: rotate(45deg); background: #1d4ed8; border: 3px solid #fff; box-shadow: 0 0 0 2px #1d4ed8, 0 1px 6px rgba(0, 0, 0, 0.6); }
