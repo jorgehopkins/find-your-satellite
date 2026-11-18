@@ -6,7 +6,7 @@ import { createLocationController } from "./location-controller.js";
 
 const youIcon = L.divIcon({
   className: "you-icon",
-  html: '<span class="you-dot" role="img" aria-label="You are here"></span>',
+  html: '<span class="you-marker" role="img" aria-label="You are here"></span>',
   iconSize: [18, 18],
   iconAnchor: [9, 9],
 });

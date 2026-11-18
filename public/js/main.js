@@ -23,7 +23,7 @@ const trackButton = $("track-button");
 // --- Marker ---
 const issIcon = L.divIcon({
   className: "iss-icon",
-  html: '<span class="iss-dot" role="img" aria-label="International Space Station"></span>',
+  html: '<span class="iss-marker" role="img" aria-label="International Space Station"></span>',
   iconSize: [22, 22],
   iconAnchor: [11, 11],
 });

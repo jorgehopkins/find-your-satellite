@@ -62,7 +62,32 @@ describe("the portal page", () => {
   it("sends a Content-Security-Policy limiting scripts and images", async () => {
     const csp = (await fetch(`${base}/`)).headers.get("content-security-policy");
     expect(csp).toMatch(/script-src 'self'(;|$)/);
-    expect(csp).toContain("img-src 'self' data: https://*.tile.openstreetmap.org");
+  });
+
+  // Does a CSP host-source match a URL's origin? A "*." wildcard needs at least one subdomain label.
+  const sourceMatches = (source, url) => {
+    const { protocol, host } = new URL(url);
+    const m = /^(https?:)\/\/(\*\.)?([^/:]+)$/.exec(source);
+    if (!m || m[1] !== protocol) return false;
+    return m[2] ? host.endsWith(`.${m[3]}`) : host === m[3];
+  };
+
+  it("img-src allows the tile URL map.js uses, and nothing else from outside", async () => {
+    const csp = (await fetch(`${base}/`)).headers.get("content-security-policy");
+    const imgSrc = csp.split(";").map((d) => d.trim()).find((d) => d.startsWith("img-src "));
+    const sources = imgSrc.split(/\s+/).slice(1);
+    const source = readFileSync(new URL("../public/js/map.js", import.meta.url), "utf8");
+    const template = /L\.tileLayer\(\s*"([^"]+)"/.exec(source)[1];
+    // Every subdomain the template can expand to ({s} -> a, b, c) must be allowed.
+    const urls = (template.includes("{s}") ? ["a", "b", "c"].map((s) => template.replace("{s}", s)) : [template]).map((u) =>
+      u.replace("{z}", "3").replace("{x}", "1").replace("{y}", "2"),
+    );
+    for (const url of urls) {
+      expect(sources.some((s) => sourceMatches(s, url)), `${url} blocked by img-src ${sources.join(" ")}`).toBe(true);
+    }
+    // Anything beyond 'self' and data: must be needed by a tile URL.
+    const outside = sources.filter((s) => s !== "'self'" && s !== "data:");
+    expect(outside.every((s) => urls.some((u) => sourceMatches(s, u)))).toBe(true);
   });
 
   it("has a Cache-Control that is safe in development", async () => {
