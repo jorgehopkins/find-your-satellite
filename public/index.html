@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live ISS map</title>
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/vendor/leaflet/leaflet.js"></script>
+  <script type="module" src="/assets/js/main.js"></script>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="panel">
+    <section id="readout" aria-label="ISS position">
+      <dl>
+        <dt>Latitude</dt><dd id="readout-latitude"></dd>
+        <dt>Longitude</dt><dd id="readout-longitude"></dd>
+        <dt>Altitude</dt><dd id="readout-altitude"></dd>
+        <dt>Speed</dt><dd id="readout-speed"></dd>
+      </dl>
+      <p id="readout-horizon" hidden></p>
+    </section>
+    <p id="notice" role="status"></p>
+    <button id="track-button" type="button" disabled>Track ISS</button>
+  </div>
+</body>
+</html>
