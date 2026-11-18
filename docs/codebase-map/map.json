@@ -1,15 +1,140 @@
 {
   "modules": [
     {
-      "id": "src",
-      "files": 2,
+      "id": ".",
+      "files": 1,
       "summary": "Started from the Software Factory's `web-app` Domain Pack.",
+      "dependsOn": [],
+      "interface": [
+        {
+          "file": "vitest.browser.config.js",
+          "names": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "browser",
+      "files": 1,
+      "summary": "Loads \"/\" in headless Chromium with the real CSP header and a stubbed data service.",
+      "dependsOn": [
+        "src"
+      ],
+      "interface": []
+    },
+    {
+      "id": "public/js",
+      "files": 13,
+      "summary": null,
+      "dependsOn": [],
+      "interface": [
+        {
+          "file": "animate.js",
+          "names": [
+            "interpolatePosition"
+          ]
+        },
+        {
+          "file": "feed.js",
+          "names": [
+            "feed"
+          ]
+        },
+        {
+          "file": "format.js",
+          "names": [
+            "formatAge",
+            "noticeText",
+            "readoutText"
+          ]
+        },
+        {
+          "file": "geo.js",
+          "names": [
+            "isAboveHorizon"
+          ]
+        },
+        {
+          "file": "iss-feed.js",
+          "names": [
+            "createIssFeed"
+          ]
+        },
+        {
+          "file": "location-controller.js",
+          "names": [
+            "FIRST_VIEW_ZOOM",
+            "GEOLOCATION_TIMEOUT_MS",
+            "NOTICES",
+            "createLocationController"
+          ]
+        },
+        {
+          "file": "map.js",
+          "names": [
+            "map"
+          ]
+        },
+        {
+          "file": "tracker.js",
+          "names": [
+            "TRACK_MIN_ZOOM",
+            "createTracker",
+            "nearestLongitude"
+          ]
+        },
+        {
+          "file": "trail.js",
+          "names": [
+            "MAX_POINTS",
+            "createTrail"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "src",
+      "files": 7,
+      "summary": null,
       "dependsOn": [],
       "interface": [
         {
           "file": "app.js",
           "names": [
+            "createHandle",
             "handle"
+          ]
+        },
+        {
+          "file": "http.js",
+          "names": [
+            "createApp",
+            "stdoutLog"
+          ]
+        },
+        {
+          "file": "iss.js",
+          "names": [
+            "createIss"
+          ]
+        },
+        {
+          "file": "log.js",
+          "names": [
+            "stdoutLog"
+          ]
+        },
+        {
+          "file": "static.js",
+          "names": [
+            "serveStatic"
+          ]
+        },
+        {
+          "file": "tracing.js",
+          "names": [
+            "withSpan"
           ]
         }
       ]
