@@ -15,6 +15,8 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
 #readout dt { font-weight: 600; }
 #readout dd { margin: 0; text-align: right; }
 #readout p { margin: 4px 0 0; }
+#location-notice { font-size: 13px; }
+#location-notice:empty { display: none; }
 #notice { margin: 0; padding: 6px 10px; font-size: 13px; }
 #notice:empty { display: none; }
 #track-button { padding: 10px; font-size: 16px; border: 0; cursor: pointer; }
