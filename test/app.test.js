@@ -77,7 +77,7 @@ describe("the portal page", () => {
     expect(source).toContain("export const map");
     expect(source).not.toMatch(/dragging:\s*false|scrollWheelZoom:\s*false|touchZoom:\s*false|zoomControl:\s*false|\.(dragging|scrollWheelZoom|touchZoom|doubleClickZoom)\.disable/);
     const main = readFileSync(new URL("../public/js/main.js", import.meta.url), "utf8");
-    expect(main).toContain('import "./map.js"');
+    expect(main).toMatch(/import (\{ map \} from )?"\.\/map\.js"/);
   });
 });
 
