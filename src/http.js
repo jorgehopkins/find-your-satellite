@@ -2,10 +2,10 @@
 import { createServer } from "node:http";
 import { SpanKind, SpanStatusCode } from "@opentelemetry/api";
 import { handle as appHandle } from "./app.js";
+import { stdoutLog } from "./log.js";
 import { withSpan } from "./tracing.js";
 
-/** Writes one JSON line to stdout. */
-export const stdoutLog = (fields) => process.stdout.write(`${JSON.stringify({ time: new Date().toISOString(), ...fields })}\n`);
+export { stdoutLog };
 
 const describeError = (error) => ({
   name: error?.name,
